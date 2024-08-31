@@ -31,6 +31,8 @@ public class BoomerangScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += velocity * Time.deltaTime;
+        transform.position += Vector3.right * 0.02f;
+        
     }
+
 }
