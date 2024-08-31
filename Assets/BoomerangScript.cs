@@ -23,7 +23,7 @@ public class BoomerangScript : MonoBehaviour
         transform.rotation = playerScript.transform.rotation;
         //プレイヤーのthrowPowerをスピードに代入する
         speed = playerScript.throwPower;
-        velocity = transform.rotation * new Vector3(0, 0, speed);
+        
         //５秒後に消滅
         Destroy(gameObject, 5);
     }
@@ -31,7 +31,11 @@ public class BoomerangScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        velocity = transform.rotation * new Vector3(0, 0, speed);
+        //ブーメランの移動
         transform.position += velocity * Time.deltaTime;
+        //速度の減速
+        speed -= 0.05f;
     }
 
 }

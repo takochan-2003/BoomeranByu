@@ -17,9 +17,12 @@ public class PlayerScript : MonoBehaviour
     //ベクトル
     private Vector3 velocity;
 
-    //投げるパワー
+    //投げるパワーの値
     public float throwPower = 0.0f;
-    const float maxThrowPower = 20.0f;
+    //投げるパワーの最低値
+    private const float kThrowPower = 10.0f;
+    //投げるパワーの最大値
+    const float maxThrowPower = 25.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -79,7 +82,7 @@ public class PlayerScript : MonoBehaviour
         {
             //ボタンを押し続けている処理
 
-            throwPower += 0.05f;
+            throwPower += 0.07f;
             if (throwPower >= maxThrowPower)
             {
                 throwPower = maxThrowPower;
@@ -102,7 +105,7 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            throwPower = 0.0f;
+            throwPower = kThrowPower;
         }
 
 
