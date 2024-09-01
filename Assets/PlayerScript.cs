@@ -8,6 +8,8 @@ public class PlayerScript : MonoBehaviour
     public GameObject bullet;
     public CharacterController characterController;
 
+   
+
     //移動の最高速度
     private float maxSpeed = 5.0f;
     //最低速度
@@ -16,6 +18,7 @@ public class PlayerScript : MonoBehaviour
     private float turnRate = 7.0f;
     //ベクトル
     private Vector3 velocity;
+    
 
     //投げるパワーの値
     public float throwPower = 0.0f;
@@ -36,9 +39,49 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        Move();
+
+        //球発射
+        if (Input.GetButton("Fire3"))
+        {
+
+            //ボタンを押し続けている処理
+            throwPower += 0.03f;
+            if (throwPower >= maxThrowPower)
+            {
+                throwPower = maxThrowPower;
+            }
+
+            
+        }
+        else if (Input.GetButtonUp("Fire3"))
+        {
+
+            ////ボタンを離した処理
+           
+            Vector3 position = transform.position;
+            Instantiate(bullet, position, Quaternion.identity);
+
+            Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
+            bulletRigidbody.AddForce(transform.forward * 100);
+        }
+        else
+        {
+            throwPower = kThrowPower;
+        }
+
+
+        Debug.Log(throwPower);
+
+    }
+
+    private void Move()
+    {
         Vector3 vec = this.velocity;
         //移動速度
         float speed = 0.0f;
+
 
         //キャラクターが地面に接しているかを判定
         if (this.characterController.isGrounded)
@@ -74,57 +117,13 @@ public class PlayerScript : MonoBehaviour
         //重力による落下を設定
         this.velocity.y += Physics.gravity.y * Time.deltaTime;
 
-        //移動させる
-        this.characterController.Move(this.velocity * Time.deltaTime);
 
-        //球発射
-        if (Input.GetButton("Fire3"))
+        if (!Input.GetButton("Fire3"))
         {
-            //ボタンを押し続けている処理
-
-            throwPower += 0.07f;
-            if (throwPower >= maxThrowPower)
-            {
-                throwPower = maxThrowPower;
-            }
+            //移動させる
+            this.characterController.Move(this.velocity * Time.deltaTime);
         }
-        else if (Input.GetButtonUp("Fire3"))
-        {
-
-            ////ボタンを離した処理
-            //
-            //position.y += 0.8f;
-            //position.z += 1.0f;
-            //
-            //Instantiate(bullet, position, Quaternion.identity);
-            Vector3 position = transform.position;
-            Instantiate(bullet, position, Quaternion.identity);
-
-            Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
-            bulletRigidbody.AddForce(transform.forward * 100);
-        }
-        else
-        {
-            throwPower = kThrowPower;
-        }
-
-
-        Debug.Log(throwPower);
-
+     
     }
-
-    //void FixedUpdate()
-    //{
-    //    //球発射
-    //    if(Input.GetButtonDown("Fire3"))
-    //    {
-    //        Vector3 position = transform.position;
-    //        position.y += 0.8f;
-    //        position.z += 1.0f;
-    //    
-    //        Instantiate(bullet, position, Quaternion.identity);
-    //    }
-    //
-    //}
 
 }
