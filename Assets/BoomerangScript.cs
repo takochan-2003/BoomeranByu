@@ -38,4 +38,6 @@ public class BoomerangScript : MonoBehaviour
         speed -= 0.05f;
     }
 
+
+
 }
