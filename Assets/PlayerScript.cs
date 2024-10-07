@@ -72,7 +72,7 @@ public class PlayerScript : MonoBehaviour
         }
 
 
-        Debug.Log(throwPower);
+        //Debug.Log(throwPower);
 
     }
 
