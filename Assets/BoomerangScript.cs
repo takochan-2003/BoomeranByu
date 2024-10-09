@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BoomerangScript : MonoBehaviour
@@ -11,8 +12,17 @@ public class BoomerangScript : MonoBehaviour
     public Rigidbody rb;
 
     float speed;
+
+    //減速するときにかかる値
     float stopPower;
     float backPower;
+    //上の値の最大値
+    float kPower;
+
+    //戻っているか判断するフラグ
+    bool backFlag;
+    //タイマー変数
+    int timer;
 
     private Vector3 velocity;
 
@@ -38,11 +48,28 @@ public class BoomerangScript : MonoBehaviour
     {
         //速度を徐々に下げる
         Easing();
-        //velocity作成
-        velocity = transform.rotation * new Vector3(0, 0, speed);
-        //ブーメランの移動
-        transform.position += velocity * Time.deltaTime;
+        if(backFlag == false)
+        {
+            //velocity作成
+            velocity = transform.rotation * new Vector3(0, 0, speed);
+            //ブーメランの移動
+            transform.position += velocity * Time.deltaTime;
+        }
+        else
+        {
+            LookAt(player);
+        }
         Debug.Log(speed);
+    }
+
+    public void LookAt(GameObject target)
+    {
+        timer++;
+        if(timer % 30 == 0)
+        {
+            transform.LookAt(target.transform);
+        }
+        GetComponent<Rigidbody>().velocity = transform.forward.normalized * (speed) * -1;
     }
 
     void Easing()
@@ -55,11 +82,20 @@ public class BoomerangScript : MonoBehaviour
         }
         else
         {
+            backFlag = true;
             //球が止まり切ったら少しずつ加速して戻っていく
             backPower += 0.0005f;
             speed = speed - backPower;
         }
        
+        if(stopPower >= kPower)
+        {
+            stopPower = kPower;
+        }
+        if(backPower >= kPower)
+        {
+            backPower = kPower;
+        }
 
     }
 
@@ -67,8 +103,26 @@ public class BoomerangScript : MonoBehaviour
     {
         stopPower = 0.001f;
         backPower = 0.001f;
+        kPower = 0.08f;
+        backFlag = false;
+        timer = 0;
     }
 
- 
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    //プレイヤーに触れた時かつ、弾が発生してから30F後だったら消える
+    //    if (collision.gameObject.tag == "Player")
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
 
+    private void OnTriggerEnter(Collider other)
+    {
+        //プレイヤーに触れた時かつ、弾が発生してから30F後だったら消える
+        if (other.gameObject.tag == "Player"&& timer >= 30)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
