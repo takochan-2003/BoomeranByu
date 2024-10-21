@@ -108,15 +108,6 @@ public class BoomerangScript : MonoBehaviour
         timer = 0;
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    //プレイヤーに触れた時かつ、弾が発生してから30F後だったら消える
-    //    if (collision.gameObject.tag == "Player")
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
-
     private void OnTriggerEnter(Collider other)
     {
         //プレイヤーに触れた時かつ、弾が発生してから30F後だったら消える
