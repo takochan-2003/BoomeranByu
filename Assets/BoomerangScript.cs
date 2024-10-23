@@ -103,7 +103,7 @@ public class BoomerangScript : MonoBehaviour
     {
         stopPower = 0.001f;
         backPower = 0.001f;
-        kPower = 0.08f;
+        kPower = 0.06f;
         backFlag = false;
         timer = 0;
     }
