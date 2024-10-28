@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4113168529025041882}
   - component: {fileID: -223461377870075734}
   - component: {fileID: -2974469168919924187}
+  - component: {fileID: -204617447754708978}
   m_Layer: 0
   m_Name: bullet
   m_TagString: Boomeran
@@ -133,7 +134,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 4
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &-2974469168919924187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,3 +148,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: -223461377870075734}
+--- !u!114 &-204617447754708978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4972218519430347255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6752693a568df394b85ebf72d29b05d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
