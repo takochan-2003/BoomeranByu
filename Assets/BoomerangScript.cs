@@ -59,7 +59,7 @@ public class BoomerangScript : MonoBehaviour
         {
             LookAt(player);
         }
-        Debug.Log(speed);
+        //Debug.Log(speed);
     }
 
     public void LookAt(GameObject target)
@@ -114,6 +114,15 @@ public class BoomerangScript : MonoBehaviour
         if (other.gameObject.tag == "Player"&& timer >= 30)
         {
             Destroy(gameObject);
+        }
+    }
+
+    //“G‚É“–‚½‚Á‚½‚ç“|‚·
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.tag == "Enemy")
+        {
+            Destroy(other.gameObject);
         }
     }
 }
