@@ -21,7 +21,6 @@ public class EnemyScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Shot")
         {
-            Debug.Log("ShotÇ∆è’ìÀ");
             Destroy(gameObject);
         }
     }

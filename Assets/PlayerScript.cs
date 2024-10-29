@@ -26,6 +26,8 @@ public class PlayerScript : MonoBehaviour
     private const float kThrowPower = 10.0f;
     //投げるパワーの最大値
     const float maxThrowPower = 25.0f;
+    //ブーメランを投げるフラグ
+    public bool throwFlag = true;
 
     // Start is called before the first frame update
     void Start()
@@ -42,34 +44,7 @@ public class PlayerScript : MonoBehaviour
 
         Move();
 
-        //球発射
-        if (Input.GetButton("Fire3"))
-        {
-
-            //ボタンを押し続けている処理
-            throwPower += 0.03f;
-            if (throwPower >= maxThrowPower)
-            {
-                throwPower = maxThrowPower;
-            }
-
-            
-        }
-        else if (Input.GetButtonUp("Fire3"))
-        {
-
-            ////ボタンを離した処理
-           
-            Vector3 position = transform.position;
-            Instantiate(bullet, position, Quaternion.identity);
-
-            Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
-            bulletRigidbody.AddForce(transform.forward * 100);
-        }
-        else
-        {
-            throwPower = kThrowPower;
-        }
+        Throw();
 
 
         //Debug.Log(throwPower);
@@ -146,6 +121,45 @@ public class PlayerScript : MonoBehaviour
             this.characterController.Move(this.velocity * Time.deltaTime);
         }
      
+    }
+
+    private void Throw()
+    {
+        if (throwFlag == true)
+        {
+            //球発射
+            if (Input.GetButton("Fire3"))
+            {
+
+                //ボタンを押し続けている処理
+                throwPower += 0.03f;
+                if (throwPower >= maxThrowPower)
+                {
+                    throwPower = maxThrowPower;
+                }
+
+
+            }
+            else if (Input.GetButtonUp("Fire3"))
+            {
+
+                ////ボタンを離した処理
+
+                Vector3 position = transform.position;
+                Instantiate(bullet, position, Quaternion.identity);
+
+                Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
+                bulletRigidbody.AddForce(transform.forward * 100);
+
+                throwFlag = false;
+            }
+            else
+            {
+                throwPower = kThrowPower;
+            }
+        }
+
+        Debug.Log(throwFlag);
     }
 
 }

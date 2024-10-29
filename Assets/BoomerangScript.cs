@@ -114,6 +114,7 @@ public class BoomerangScript : MonoBehaviour
         if (other.gameObject.tag == "Player"&& timer >= 30)
         {
             Destroy(gameObject);
+            playerScript.throwFlag = true;
         }
     }
 
