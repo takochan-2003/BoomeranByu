@@ -9,6 +9,8 @@ public class BoomerangScript : MonoBehaviour
     GameObject player;
     PlayerScript playerScript;
 
+    //敵の位置
+    public Transform enemyTarget;
     public Rigidbody rb;
 
     float speed;
@@ -21,6 +23,10 @@ public class BoomerangScript : MonoBehaviour
 
     //戻っているか判断するフラグ
     bool backFlag;
+    //敵が範囲内に入ったときにホーミングさせるかのフラグ
+    bool homingFlag = false;
+    //トルク比
+    public float torqueRaito;
     //タイマー変数
     int timer;
 
@@ -54,6 +60,7 @@ public class BoomerangScript : MonoBehaviour
             velocity = transform.rotation * new Vector3(0, 0, speed);
             //ブーメランの移動
             transform.position += velocity * Time.deltaTime;
+            Homing();
         }
         else
         {
@@ -71,6 +78,30 @@ public class BoomerangScript : MonoBehaviour
             transform.LookAt(target.transform);
         }
         GetComponent<Rigidbody>().velocity = transform.forward.normalized * (speed) * -1;
+    }
+
+    private void Homing()
+    {
+        if(homingFlag == false)
+        {
+            //向きをターゲットの方に向ける
+            var diff = enemyTarget.transform.position - transform.position;
+            var enemyTarget_rot = Quaternion.LookRotation(diff);
+            var rot = enemyTarget_rot * Quaternion.Inverse(transform.rotation);
+
+            if(rot.w < 0f)
+            {
+                rot.x = -rot.x;
+                rot.y = -rot.y;
+                rot.z = -rot.z;
+                rot.w = -rot.w;
+            }
+            var torque = new Vector3(rot.x, rot.y, rot.z) * torqueRaito;
+            GetComponent<Rigidbody>().AddForce(torque);
+
+            //まっすぐ進む
+            GetComponent<Rigidbody>().velocity = transform.forward * speed;
+        }
     }
 
     void Easing()
@@ -107,6 +138,7 @@ public class BoomerangScript : MonoBehaviour
         kPower = 0.06f;
         backFlag = false;
         timer = 0;
+        torqueRaito = 1.0f;
     }
 
     private void OnTriggerEnter(Collider other)
