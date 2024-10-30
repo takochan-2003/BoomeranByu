@@ -57,6 +57,7 @@ public class BoomerangScript : MonoBehaviour
         }
         else
         {
+            //ブーメランが戻ってくるときに軌道をプレイヤーに向ける
             LookAt(player);
         }
         //Debug.Log(speed);
