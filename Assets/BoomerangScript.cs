@@ -18,11 +18,9 @@ public class BoomerangScript : MonoBehaviour
     //減速するときにかかる値
     private float stopPower;
     private float backPower;
-    //減速するときにかかる値の最小値
-    private const　float minStopPower = 0.003f;
-    private const float minBackPower = 0.003f;
     //上の値の最大値
-    private const float kPower = 0.12f;
+    private float kPower;
+
     //戻っているか判断するフラグ
     private bool backFlag;
     //タイマー変数
@@ -75,7 +73,7 @@ public class BoomerangScript : MonoBehaviour
             //ブーメランが戻ってくるときに軌道をプレイヤーに向ける
             LookAt(player);
         }
-        
+        Debug.Log(transform.position);
     }
 
     //ブーメランが戻ってくるときに軌道をプレイヤーに向ける関数
@@ -108,19 +106,20 @@ public class BoomerangScript : MonoBehaviour
        
         if(stopPower >= kPower)
         {
-            stopPower = minStopPower;
+            stopPower = kPower;
         }
         if(backPower >= kPower)
         {
-            backPower = minBackPower;
+            backPower = kPower;
         }
 
     }
 
     void Initialze()
     {
-        stopPower = minStopPower;
-        backPower = minBackPower;
+        stopPower = 0.001f;
+        backPower = 0.001f;
+        kPower = 0.06f;
         backFlag = false;
         timer = 0;
     }
