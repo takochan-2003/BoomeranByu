@@ -47,7 +47,7 @@ public class PlayerScript : MonoBehaviour
         Throw();
 
 
-        //Debug.Log(throwPower);
+        //Debug.Log(1);
 
     }
 

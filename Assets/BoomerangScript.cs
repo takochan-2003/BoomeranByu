@@ -63,18 +63,16 @@ public class BoomerangScript : MonoBehaviour
             //ブーメランの移動
             transform.position += velocity * Time.deltaTime;
 
-            if(sensorScript.findTarget == false)
-            {
-                transform.rotation = Quaternion.LookRotation((sensorScript.targetPosition - transform.position), Vector3.zero);
-            }
+            //if(sensorScript.findTarget == false)
+            //{
+            //    transform.rotation = Quaternion.LookRotation((sensorScript.targetPosition - transform.position), Vector3.zero);
+            //}
         }
         else
         {
             //ブーメランが戻ってくるときに軌道をプレイヤーに向ける
             LookAt(player);
         }
-
-        Debug.Log(transform.position);
     }
 
     //ブーメランが戻ってくるときに軌道をプレイヤーに向ける関数
