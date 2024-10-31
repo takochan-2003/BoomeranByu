@@ -2,32 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour
+public class SensorScript : MonoBehaviour
 {
-
     private GameObject[] targets;
     private GameObject closeEnemy;
 
     // Start is called before the first frame update
     void Start()
     {
-        targets = GameObject.FindGameObjectsWithTag("Enemy");
-        //‰Šú’l‚Ìİ’è
-        float closeDist = 1000;
+        //targets = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(transform.position);
+        
     }
 
-    ////ƒu[ƒƒ‰ƒ“‚É“–‚½‚Á‚½‚çÁ–Å‚³‚¹‚é
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Shot")
-        {
-            Destroy(gameObject);
-        }
+        
     }
 }

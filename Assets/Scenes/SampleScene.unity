@@ -400,6 +400,7 @@ MonoBehaviour:
   bullet: {fileID: 4972218519430347255, guid: 4397052b6258d4e449dc599804663978, type: 3}
   characterController: {fileID: 1170093773}
   throwPower: 0
+  throwFlag: 1
 --- !u!54 &1170093778
 Rigidbody:
   m_ObjectHideFlags: 0
