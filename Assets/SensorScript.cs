@@ -25,7 +25,7 @@ public class SensorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(targetPosition);
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -55,6 +55,7 @@ public class SensorScript : MonoBehaviour
 
             targetPosition = closeEnemy.transform.position;
             findTarget = false;
+            Debug.Log(targetPosition);
         }
        
         
