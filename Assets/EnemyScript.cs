@@ -6,20 +6,34 @@ public class EnemyScript : MonoBehaviour
 {
     public GameObject player;
     private float speed = 2.0f;
-    // Start is called before the first frame update
+
+    //Enemyのスピード
+    private const float speed = 2.0f;
+        player = GameObject.Find("Player");
     void Start()
     {
+        //プレイヤーを取得
         player = GameObject.Find("Player");
     }
+        LookAt(player);
 
-    // Update is called once per frame
-    void Update()
-    {
-        //LookAt(player);
     }
 
     public void LookAt(GameObject target)
     {
+        //プレイヤーに向ける
+        transform.LookAt(target.transform);
+        // プレイヤーに向かって移動
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
         //プレイヤーに向ける
         transform.LookAt(target.transform);
         // プレイヤーに向かって移動
