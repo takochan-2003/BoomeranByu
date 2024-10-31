@@ -5,21 +5,15 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
 
-    private GameObject[] targets;
-    private GameObject closeEnemy;
-
     // Start is called before the first frame update
     void Start()
     {
-        targets = GameObject.FindGameObjectsWithTag("Enemy");
-        //‰Šú’l‚Ìİ’è
-        float closeDist = 1000;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(transform.position);
+        //Debug.Log(transform.position);
     }
 
     ////ƒu[ƒƒ‰ƒ“‚É“–‚½‚Á‚½‚çÁ–Å‚³‚¹‚é

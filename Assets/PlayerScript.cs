@@ -159,7 +159,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        Debug.Log(throwFlag);
+        //Debug.Log(throwFlag);
     }
 
 }
