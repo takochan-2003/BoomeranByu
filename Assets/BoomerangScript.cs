@@ -48,7 +48,7 @@ public class BoomerangScript : MonoBehaviour
 
         //SensorScript‚ğæ“¾
         sensor = GameObject.Find("sensor");
-        sensorScript = sensor.GetComponent<SensorScript>();
+        sensorScript = GetComponent<SensorScript>();
     }
 
     // Update is called once per frame
@@ -63,10 +63,10 @@ public class BoomerangScript : MonoBehaviour
             //ƒu[ƒƒ‰ƒ“‚ÌˆÚ“®
             transform.position += velocity * Time.deltaTime;
 
-            if(sensorScript.findTarget == false)
-            {
-                transform.rotation = Quaternion.LookRotation((sensorScript.targetPosition - transform.position), Vector3.zero);
-            }
+           //if(sensorScript.findTarget == false)
+           //{
+           //    transform.rotation = Quaternion.LookRotation((sensorScript.targetPosition - transform.position), Vector3.zero);
+           //}
         }
         else
         {

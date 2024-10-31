@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4087220382471688857}
   - component: {fileID: 6482818539453532529}
   - component: {fileID: 5115602840656274738}
-  - component: {fileID: -9069456755770611308}
   - component: {fileID: 8571635162067429929}
   m_Layer: 0
   m_Name: Boomeran
@@ -108,20 +107,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-9069456755770611308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4121846993536050555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd31e1f9bdabff46a16e3edee262f1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 8571635162067429929}
-  homingFlag: 0
 --- !u!54 &8571635162067429929
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -161,6 +146,7 @@ GameObject:
   - component: {fileID: 2209893019590921486}
   - component: {fileID: 3773866671248470999}
   - component: {fileID: 3852185247908483700}
+  - component: {fileID: 8599855187561104861}
   m_Layer: 0
   m_Name: sensor
   m_TagString: Untagged
@@ -245,3 +231,17 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8599855187561104861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8363652314818337989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ade32a1e98d3a4592132cafc683d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  findTarget: 0
+  targetPosition: {x: 0, y: 0, z: 0}
