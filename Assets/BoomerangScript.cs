@@ -14,15 +14,17 @@ public class BoomerangScript : MonoBehaviour
     float speed;
 
     //減速するときにかかる値
-    float stopPower;
-    float backPower;
+    private float stopPower;
+    private float backPower;
     //上の値の最大値
-    float kPower;
+    private float kPower;
 
     //戻っているか判断するフラグ
-    bool backFlag;
+    private bool backFlag;
     //タイマー変数
-    int timer;
+    private int timer;
+    //敵に追尾するかのフラグ
+    public bool homingFlag;
 
     private Vector3 velocity;
 
@@ -41,6 +43,8 @@ public class BoomerangScript : MonoBehaviour
         
         //５秒後に消滅
         Destroy(gameObject, 5);
+
+        
     }
 
     // Update is called once per frame
@@ -60,7 +64,7 @@ public class BoomerangScript : MonoBehaviour
             //ブーメランが戻ってくるときに軌道をプレイヤーに向ける
             LookAt(player);
         }
-        //Debug.Log(speed);
+        Debug.Log(speed);
     }
 
     //ブーメランが戻ってくるときに軌道をプレイヤーに向ける関数

@@ -27,7 +27,7 @@ public class SensorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(targetPosition);
+        //Debug.Log(targetPosition);
     }
 
     private void OnTriggerEnter(Collider other)
