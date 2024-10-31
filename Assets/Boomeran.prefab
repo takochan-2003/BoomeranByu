@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8571635162067429929}
+  homingFlag: 0
 --- !u!54 &8571635162067429929
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -194,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ade32a1e98d3a4592132cafc683d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  findTarget: 0
   targetPosition: {x: 0, y: 0, z: 0}
 --- !u!54 &3773866671248470999
 Rigidbody:

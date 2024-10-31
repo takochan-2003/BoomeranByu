@@ -8,8 +8,7 @@ public class SensorScript : MonoBehaviour
     private GameObject closeEnemy;
 
     float closeDist;
-    bool findTarget;
-    bool findFlag;
+    public bool findTarget;
 
     public Vector3 targetPosition;
 
@@ -20,14 +19,13 @@ public class SensorScript : MonoBehaviour
         //èâä˙ílÇÃê›íË
         closeDist = 1000;
         findTarget = true;
-        findFlag = false;
-
+        targetPosition = Vector3.zero;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(targetPosition);
+        
     }
 
     private void OnTriggerEnter(Collider other)
