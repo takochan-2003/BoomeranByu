@@ -66,7 +66,7 @@ public class BoomerangScript : MonoBehaviour
 
             if(sensorScript.findTarget == false && homingFlag ==true)
             {
-                // transform.rotation = Quaternion.LookRotation((sensorScript.targetPosition - transform.position), Vector3.up);
+                transform.rotation = Quaternion.LookRotation((sensorScript.targetPosition - transform.position), Vector3.up);
                 transform.LookAt(sensorScript.targetPosition);
                 homingFlag = false;
             }
