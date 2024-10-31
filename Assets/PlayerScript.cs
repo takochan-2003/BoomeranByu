@@ -23,9 +23,9 @@ public class PlayerScript : MonoBehaviour
     //投げるパワーの値
     public float throwPower = 0.0f;
     //投げるパワーの最低値
-    private const float kThrowPower = 10.0f;
+    private const float kThrowPower = 13.0f;
     //投げるパワーの最大値
-    const float maxThrowPower = 25.0f;
+    private const float maxThrowPower = 30.0f;
     //ブーメランを投げるフラグ
     public bool throwFlag = true;
 
