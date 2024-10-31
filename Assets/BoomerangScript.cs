@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -27,7 +26,7 @@ public class BoomerangScript : MonoBehaviour
     //タイマー変数
     private int timer;
     //敵に追尾するかのフラグ
-    private bool homingFlag;
+    public bool homingFlag;
 
     private Vector3 velocity;
 
@@ -45,7 +44,7 @@ public class BoomerangScript : MonoBehaviour
         speed = playerScript.throwPower;
         
         //５秒後に消滅
-        Destroy(gameObject, 5);
+        //Destroy(gameObject, 5);
 
         //SensorScriptを取得
         sensor = GameObject.Find("sensor");
@@ -64,12 +63,10 @@ public class BoomerangScript : MonoBehaviour
             //ブーメランの移動
             transform.position += velocity * Time.deltaTime;
 
-            if(sensorScript.findTarget == false && homingFlag ==true)
-            {
-                transform.rotation = Quaternion.LookRotation((sensorScript.targetPosition - transform.position), Vector3.up);
-                transform.LookAt(sensorScript.targetPosition);
-                homingFlag = false;
-            }
+            //if(sensorScript.findTarget == false)
+            //{
+            //    transform.rotation = Quaternion.LookRotation((sensorScript.targetPosition - transform.position), Vector3.zero);
+            //}
         }
         else
         {
@@ -125,7 +122,6 @@ public class BoomerangScript : MonoBehaviour
         kPower = 0.06f;
         backFlag = false;
         timer = 0;
-        homingFlag = true;
     }
 
     private void OnTriggerEnter(Collider other)
