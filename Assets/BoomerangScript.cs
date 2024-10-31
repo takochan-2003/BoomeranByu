@@ -47,7 +47,7 @@ public class BoomerangScript : MonoBehaviour
         speed = playerScript.throwPower;
         
         //５秒後に消滅
-        Destroy(gameObject, 5);
+        //Destroy(gameObject, 5);
 
         //SensorScriptを取得
         sensor = GameObject.Find("sensor");
@@ -66,9 +66,9 @@ public class BoomerangScript : MonoBehaviour
             //ブーメランの移動
             transform.position += velocity * Time.deltaTime;
 
-            if(sensorScript.findTarget == false && homingFlag ==true)
+            if(sensorScript.findTarget == false)
             {
-                // transform.rotation = Quaternion.LookRotation((sensorScript.targetPosition - transform.position), Vector3.up);
+                transform.rotation = Quaternion.LookRotation((sensorScript.targetPosition - transform.position), Vector3.up);
                 transform.LookAt(sensorScript.targetPosition);
                 homingFlag = false;
             }
@@ -78,7 +78,7 @@ public class BoomerangScript : MonoBehaviour
             //ブーメランが戻ってくるときに軌道をプレイヤーに向ける
             LookAt(player);
         }
-        Debug.Log(stopPower);
+        Debug.Log(sensorScript.targetPosition);
     }
 
     //ブーメランが戻ってくるときに軌道をプレイヤーに向ける関数
