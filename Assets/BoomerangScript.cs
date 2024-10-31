@@ -30,6 +30,8 @@ public class BoomerangScript : MonoBehaviour
     private int timer;
     //敵に追尾するかのフラグ
     private bool homingFlag;
+    //直線に戻すときのフラグ
+    private bool lockatFlag;
 
     private Vector3 velocity;
 
@@ -47,7 +49,7 @@ public class BoomerangScript : MonoBehaviour
         speed = playerScript.throwPower;
         
         //５秒後に消滅
-        Destroy(gameObject, 5);
+        //Destroy(gameObject, 5);
 
         //SensorScriptを取得
         sensor = GameObject.Find("sensor");
@@ -68,7 +70,7 @@ public class BoomerangScript : MonoBehaviour
 
             if(sensorScript.findTarget == false && homingFlag ==true)
             {
-                // transform.rotation = Quaternion.LookRotation((sensorScript.targetPosition - transform.position), Vector3.up);
+                transform.rotation = Quaternion.LookRotation((sensorScript.targetPosition - transform.position), Vector3.up);
                 transform.LookAt(sensorScript.targetPosition);
                 homingFlag = false;
             }
@@ -76,9 +78,26 @@ public class BoomerangScript : MonoBehaviour
         else
         {
             //ブーメランが戻ってくるときに軌道をプレイヤーに向ける
+            //Slerp();
+            //if (lockatFlag == false)
+            //{
+            //    Slerp();
+            //}
+            //else
+            //{
+            //    LookAt(player);
+            //}
             LookAt(player);
+
         }
-        Debug.Log(stopPower);
+
+        if(speed <= -25.0f)
+        {
+            speed = -25.0f;
+            lockatFlag = true;
+        }
+
+        Debug.Log(speed);
     }
 
     //ブーメランが戻ってくるときに軌道をプレイヤーに向ける関数
@@ -87,10 +106,25 @@ public class BoomerangScript : MonoBehaviour
         timer++;
         if(timer % 30 == 0)
         {
-            //プレイヤーに向ける
+            ///プレイヤーに向ける
             transform.LookAt(target.transform);
         }
         GetComponent<Rigidbody>().velocity = transform.forward.normalized * (speed) * -1;
+    }
+
+    private void Slerp()
+    {
+        //// ターゲット方向のベクトルを取得
+        //Vector3 relativePos = player.transform.position - this.transform.position;
+        //// 方向を、回転情報に変換
+        //Quaternion rotation = Quaternion.LookRotation(relativePos);
+        //// 現在の回転情報と、ターゲット方向の回転情報を補完する
+        //transform.rotation = Quaternion.Slerp(this.transform.rotation, rotation, speed);
+        //GetComponent<Rigidbody>().velocity = transform.forward.normalized * (speed) * 1;
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(transform.position - player.transform.position), 360.0f * Time.deltaTime);
+        Vector3 velocity = gameObject.transform.rotation * new Vector3(speed, 0, 0);
+        gameObject.transform.position += velocity * Time.deltaTime;
     }
 
     void Easing()
@@ -127,6 +161,7 @@ public class BoomerangScript : MonoBehaviour
         backFlag = false;
         timer = 0;
         homingFlag = true;
+        lockatFlag = false;
     }
 
     private void OnTriggerEnter(Collider other)
