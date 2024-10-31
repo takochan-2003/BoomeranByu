@@ -20,8 +20,7 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LookAt(player);
-
+        //LookAt(player);
     }
 
     public void LookAt(GameObject target)

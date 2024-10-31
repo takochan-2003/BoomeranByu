@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class BoomerangScript : MonoBehaviour
 {
@@ -59,10 +60,11 @@ public class BoomerangScript : MonoBehaviour
     {
         //速度を徐々に下げる
         Easing();
-        if(backFlag == false)
+        //velocity作成
+        velocity = transform.rotation * new Vector3(0, 0, speed);
+        if (backFlag == false)
         {
-            //velocity作成
-            velocity = transform.rotation * new Vector3(0, 0, speed);
+            
             //ブーメランの移動
             transform.position += velocity * Time.deltaTime;
 
@@ -77,6 +79,7 @@ public class BoomerangScript : MonoBehaviour
         {
             //ブーメランが戻ってくるときに軌道をプレイヤーに向ける
             LookAt(player);
+            //Slerp();
         }
         Debug.Log(stopPower);
     }
@@ -92,6 +95,14 @@ public class BoomerangScript : MonoBehaviour
         }
         GetComponent<Rigidbody>().velocity = transform.forward.normalized * (speed) * -1;
     }
+
+    public void Slerp()
+    {
+        transform.rotation = Quaternion.RotateTowards(transform.rotation,Quaternion.LookRotation
+            (sensorScript.transform.position - transform.position),120.0f * Time.deltaTime);
+        //transform.position += velocity * Time.deltaTime;
+    }
+
 
     void Easing()
     {
