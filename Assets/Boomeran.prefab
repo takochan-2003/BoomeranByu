@@ -121,7 +121,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8571635162067429929}
-  homingFlag: 0
 --- !u!54 &8571635162067429929
 Rigidbody:
   m_ObjectHideFlags: 0
