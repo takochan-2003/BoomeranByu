@@ -147,7 +147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd31e1f9bdabff46a16e3edee262f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 45788496296075586, guid: edfe74276e5cbf642b4bb9ec839de4ee, type: 3}
+  enemyTarget: {fileID: 0}
   rb: {fileID: -223461377870075734}
+  torqueRaito: 0
 --- !u!114 &-204617447754708978
 MonoBehaviour:
   m_ObjectHideFlags: 0
