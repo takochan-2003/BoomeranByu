@@ -122,7 +122,6 @@ public class BoomerangScript : MonoBehaviour
         kPower = 0.06f;
         backFlag = false;
         timer = 0;
-        torqueRaito = 1.0f;
         homingFlag = false;
     }
 
