@@ -8,24 +8,25 @@ public class BoomerangScript : MonoBehaviour
 
     GameObject player;
     PlayerScript playerScript;
+    GameObject sensor;
+    SensorScript sensorScript;
+
     public Rigidbody rb;
 
     float speed;
 
     //減速するときにかかる値
-    float stopPower;
-    float backPower;
+    private float stopPower;
+    private float backPower;
     //上の値の最大値
-    float kPower;
+    private float kPower;
 
     //戻っているか判断するフラグ
-    bool backFlag;
-    //敵が範囲内に入ったときにホーミングさせるかのフラグ
-    bool homingFlag;
-    //トルク比
-    public float torqueRaito;
+    private bool backFlag;
     //タイマー変数
-    int timer;
+    private int timer;
+    //敵に追尾するかのフラグ
+    public bool homingFlag;
 
     private Vector3 velocity;
 
@@ -34,7 +35,7 @@ public class BoomerangScript : MonoBehaviour
     {
         Initialze();
 
-        //Playerをもらう
+        //Playerを取得
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<PlayerScript>();
         //プレイヤーと向きを合わせる
@@ -43,7 +44,11 @@ public class BoomerangScript : MonoBehaviour
         speed = playerScript.throwPower;
         
         //５秒後に消滅
-        Destroy(gameObject, 5);
+        //Destroy(gameObject, 5);
+
+        //SensorScriptを取得
+        sensor = GameObject.Find("sensor");
+        sensorScript = sensor.GetComponent<SensorScript>();
     }
 
     // Update is called once per frame
@@ -58,20 +63,25 @@ public class BoomerangScript : MonoBehaviour
             //ブーメランの移動
             transform.position += velocity * Time.deltaTime;
 
+            //if(sensorScript.findTarget == false)
+            //{
+            //    transform.rotation = Quaternion.LookRotation((sensorScript.targetPosition - transform.position), Vector3.zero);
+            //}
         }
         else
         {
             //ブーメランが戻ってくるときに軌道をプレイヤーに向ける
             LookAt(player);
         }
-        //Debug.Log(speed);
     }
 
+    //ブーメランが戻ってくるときに軌道をプレイヤーに向ける関数
     public void LookAt(GameObject target)
     {
         timer++;
         if(timer % 30 == 0)
         {
+            //プレイヤーに向ける
             transform.LookAt(target.transform);
         }
         GetComponent<Rigidbody>().velocity = transform.forward.normalized * (speed) * -1;
