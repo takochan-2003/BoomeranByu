@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -223461377870075734}
   - component: {fileID: -2974469168919924187}
   - component: {fileID: -204617447754708978}
+  - component: {fileID: 2436887201359637199}
   m_Layer: 0
   m_Name: bullet
   m_TagString: Shot
@@ -142,7 +143,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4972218519430347255}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbd31e1f9bdabff46a16e3edee262f1e, type: 3}
   m_Name: 
@@ -160,3 +161,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6752693a568df394b85ebf72d29b05d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2436887201359637199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4972218519430347255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2324a77970bab4ea5db80076f86384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  position: {x: 0, y: 0, z: 0}
+  period: 0
+  maxAcceleration: 100
+  randomPower: 0
+  randomPeriod: 0

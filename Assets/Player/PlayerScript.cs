@@ -162,4 +162,14 @@ public class PlayerScript : MonoBehaviour
         //Debug.Log(throwFlag);
     }
 
+    private void isTriggerEnter(Collider other)
+    {
+        //プレイヤーに触れた時かつ、弾が発生してから30F後だったら消える
+        if (other.gameObject.tag == "Shot")
+        {
+            Destroy(bullet);
+            throwFlag = true;
+        }
+    }
+
 }

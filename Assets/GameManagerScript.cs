@@ -9,7 +9,7 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(enemy, new Vector3(0, 0, 8), Quaternion.identity);
+        Instantiate(enemy, new Vector3(0, 0, 5), Quaternion.identity);
     }
 
     // Update is called once per frame

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+//using static UnityEditor.PlayerSettings;
 using static UnityEngine.GraphicsBuffer;
 
 public class BoomerangScript : MonoBehaviour
@@ -21,7 +22,7 @@ public class BoomerangScript : MonoBehaviour
     private float stopPower;
     private float backPower;
     //減速するときにかかる値の最小値
-    private const　float minStopPower = 0.003f;
+    private const float minStopPower = 0.003f;
     private const float minBackPower = 0.003f;
     //上の値の最大値
     private const float kPower = 0.12f;
@@ -46,9 +47,6 @@ public class BoomerangScript : MonoBehaviour
         transform.rotation = playerScript.transform.rotation;
         //プレイヤーのthrowPowerをスピードに代入する
         speed = playerScript.throwPower;
-        
-        //５秒後に消滅
-        Destroy(gameObject, 5);
 
         //SensorScriptを取得
         sensor = GameObject.Find("sensor");
@@ -60,15 +58,15 @@ public class BoomerangScript : MonoBehaviour
     {
         //速度を徐々に下げる
         Easing();
-        //velocity作成
-        velocity = transform.rotation * new Vector3(0, 0, speed);
+        
         if (backFlag == false)
         {
-            
+            //velocity作成
+            velocity = transform.rotation * new Vector3(0, 0, speed);
             //ブーメランの移動
             transform.position += velocity * Time.deltaTime;
 
-            if(sensorScript.findTarget == false && homingFlag ==true)
+            if (sensorScript.findTarget == false && homingFlag == true)
             {
                 // transform.rotation = Quaternion.LookRotation((sensorScript.targetPosition - transform.position), Vector3.up);
                 transform.LookAt(sensorScript.targetPosition);
@@ -88,7 +86,7 @@ public class BoomerangScript : MonoBehaviour
     public void LookAt(GameObject target)
     {
         timer++;
-        if(timer % 30 == 0)
+        if (timer % 30 == 0)
         {
             //プレイヤーに向ける
             transform.LookAt(target.transform);
@@ -98,15 +96,15 @@ public class BoomerangScript : MonoBehaviour
 
     public void Slerp()
     {
-        transform.rotation = Quaternion.RotateTowards(transform.rotation,Quaternion.LookRotation
-            (sensorScript.transform.position - transform.position),120.0f * Time.deltaTime);
-        //transform.position += velocity * Time.deltaTime;
+        
     }
+
+
 
 
     void Easing()
     {
-        if(speed >= 0.0f)
+        if (speed >= 0.0f)
         {
             //球が進んでいるときに少しずつ減速していく
             stopPower += 0.0005f;
@@ -119,12 +117,12 @@ public class BoomerangScript : MonoBehaviour
             backPower += 0.0005f;
             speed = speed - backPower;
         }
-       
-        if(stopPower >= kPower)
+
+        if (stopPower >= kPower)
         {
             stopPower = minStopPower;
         }
-        if(backPower >= kPower)
+        if (backPower >= kPower)
         {
             backPower = minBackPower;
         }
@@ -143,7 +141,7 @@ public class BoomerangScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //プレイヤーに触れた時かつ、弾が発生してから30F後だったら消える
-        if (other.gameObject.tag == "Player"&& timer >= 30)
+        if (other.gameObject.tag == "Player" && timer >= 30)
         {
             Destroy(gameObject);
             playerScript.throwFlag = true;
@@ -153,9 +151,10 @@ public class BoomerangScript : MonoBehaviour
     //敵に当たったら倒す
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy")
         {
             Destroy(other.gameObject);
         }
     }
 }
+
