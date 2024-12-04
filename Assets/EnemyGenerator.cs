@@ -15,7 +15,7 @@ public class EnemyGenerator : MonoBehaviour
     void Start()
     {
         //時間間隔を決定する
-        interval = 2f;
+        interval = 1f;
     }
 
     // Update is called once per frame
@@ -30,7 +30,7 @@ public class EnemyGenerator : MonoBehaviour
             //enemyをインスタンス化する(生成する)
             GameObject enemy = Instantiate(enemyPrefab);
             //生成した敵の座標を決定する
-            enemy.transform.position = new Vector3(0, 0, 10);
+            enemy.transform.position = this.transform.position;
             //経過時間を初期化して再度時間計測を始める
             time = 0f;
         }

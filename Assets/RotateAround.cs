@@ -6,7 +6,7 @@ public class RotateAround : MonoBehaviour
 {
     public Transform target; // ƒIƒuƒWƒFƒNƒgA‚ÌTransform
     public float orbitSpeed = 50f; // ‰ñ“]‘¬“x
-    public float distance = 10f; // ‰ñ“]”¼Œa
+    public float distance = 13f; // ‰ñ“]”¼Œa
 
     void Update()
     {
