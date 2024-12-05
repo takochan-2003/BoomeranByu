@@ -23,7 +23,7 @@ public class RotateAround : MonoBehaviour
         float angle = orbitSpeed * Time.deltaTime;
         transform.RotateAround(target.position, Vector3.up, angle);
 
-        // オブジェクトBをターゲットから一定の距離に維持
+        //// オブジェクトBをターゲットから一定の距離に維持
         Vector3 direction = transform.position - target.position;
         direction.Normalize();
         transform.position = target.position + direction * distance;

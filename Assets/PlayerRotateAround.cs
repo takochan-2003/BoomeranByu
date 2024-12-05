@@ -16,7 +16,7 @@ public class PlayerRotateAround : MonoBehaviour
     private float SpeedFactor = 0.1f;
 
     [SerializeField, Tooltip("”¼Œa‹——£")]
-    private float RadiusDistance = 10.0f;
+    private float RadiusDistance = 1.0f;
 
     // Update is called once per frame
     void Update()
