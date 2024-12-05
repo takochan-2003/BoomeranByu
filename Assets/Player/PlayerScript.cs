@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 public class PlayerScript : MonoBehaviour
 {
     public GameObject bullet;
+    public GameObject enemy;
     public CharacterController characterController;
 
    
@@ -18,7 +19,6 @@ public class PlayerScript : MonoBehaviour
     private float turnRate = 7.0f;
     //ベクトル
     private Vector3 velocity;
-    
 
     //投げるパワーの値
     public float throwPower = 0.0f;
@@ -29,9 +29,22 @@ public class PlayerScript : MonoBehaviour
     //ブーメランを投げるフラグ
     public bool throwFlag = true;
 
+    //無敵時間のフラグ
+    private bool invincibleFlag = false;
+    //無敵時間の現在フレーム
+    private float invincibleFlame = 0.0f;
+    //無敵時間の最大フレーム
+    private const float maxInvincibleFlame = 1.5f;
+
+    //RenderTggleのスクリプトを取得
+    private RenderTggle renderTggle;
+
     // Start is called before the first frame update
     void Start()
     {
+        //rendertggleを取得
+        renderTggle = GetComponent<RenderTggle>();
+
         //コントローラー取得
         this.characterController = this.GetComponent<CharacterController>();
         //速度を0にする
@@ -41,14 +54,11 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         Move();
 
         Throw();
 
-
-        //Debug.Log(throwPower);
-
+        TouchEnemy();
     }
 
     private void Move()
@@ -162,13 +172,33 @@ public class PlayerScript : MonoBehaviour
         //Debug.Log(throwFlag);
     }
 
-    private void isTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        //プレイヤーに触れた時かつ、弾が発生してから30F後だったら消える
-        if (other.gameObject.tag == "Shot")
+        // 敵に衝突したら敵を消滅させて無敵時間を発生させる
+        if (other.gameObject.tag == "Enemy")
         {
-            Destroy(bullet);
-            throwFlag = true;
+            Destroy(other.gameObject);
+            invincibleFlag = true;
+        }
+    }
+
+    //敵と衝突した時の処理（ダメージとか無敵時間の管理）
+    private void TouchEnemy()
+    {
+        //無敵時間の処理
+        if (invincibleFlag == true)
+        {
+            renderTggle.OnFlag();
+            invincibleFlame += Time.deltaTime;
+            if(invincibleFlame >= maxInvincibleFlame)
+            {
+                invincibleFlag = false;
+                invincibleFlame = 0.0f;
+            }
+        }
+        else
+        {
+            renderTggle.OffFlag();
         }
     }
 

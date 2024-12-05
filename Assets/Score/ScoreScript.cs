@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreScript : MonoBehaviour
 {
-    [SerializeField, Tooltip("表示座標")]
-    private Vector3 pos = Vector3.zero;
+    //スコアを表示する
+    [SerializeField] TextMeshProUGUI scoreText;
 
     //スコア
     private int score;
@@ -15,7 +17,7 @@ public class ScoreScript : MonoBehaviour
     private int previousValue;
 
     //カウントアップ中か
-    private bool isCountup;
+    private bool isCountup = true;
 
     //カウントアップアニメーション
     Sequence sequence;
@@ -32,7 +34,47 @@ public class ScoreScript : MonoBehaviour
         //カウントアップのアニメーション中であれば
         if(isCountup == true)
         {
-            
+            //スコア表示を更新する
+            scoreText.SetText("{0:000000}", previousValue);
         }
+        //Debug.Log(previousValue);
     }
+
+    public void AddPoint(int point)
+    {
+        //得点が加算される前の値
+        previousValue = score;
+        //スコアを更新
+        score += point;
+        //アニメーションが再生中であればスキップ
+        if(isCountup == true)
+        {
+            sequence.Kill(true);
+        }
+        //カウントアップアニメーションの実行
+        CountUpAnim();
+    }
+
+    void CountUpAnim()
+    {
+        //アニメーション開始
+        isCountup = true;
+        sequence = DOTween.Sequence()
+            .Append(DOTween.To(
+            () => previousValue,
+            num => previousValue = num,
+            score,
+            0.5f))
+        //少し待機してから
+        .AppendInterval(0.1f)
+        //スコア表示の更新を停止
+        .AppendCallback(() => isCountup = false);
+    }
+
+    public void Add(int point)
+    {
+        previousValue += point;
+    }
+
+
 }

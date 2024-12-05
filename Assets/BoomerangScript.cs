@@ -14,6 +14,9 @@ public class BoomerangScript : MonoBehaviour
     GameObject sensor;
     SensorScript sensorScript;
 
+    GameObject gameManager;
+    ScoreScript scoreScript;
+
     public Rigidbody rb;
 
     float speed;
@@ -51,6 +54,10 @@ public class BoomerangScript : MonoBehaviour
         //SensorScriptを取得
         sensor = GameObject.Find("sensor");
         sensorScript = sensor.GetComponent<SensorScript>();
+
+        //ScoreScriptを取得
+        gameManager = GameObject.Find("GameManager");
+        scoreScript = gameManager.GetComponent<ScoreScript>();
     }
 
     // Update is called once per frame
@@ -79,7 +86,6 @@ public class BoomerangScript : MonoBehaviour
             LookAt(player);
             //Slerp();
         }
-        Debug.Log(stopPower);
     }
 
     //ブーメランが戻ってくるときに軌道をプレイヤーに向ける関数
@@ -146,15 +152,13 @@ public class BoomerangScript : MonoBehaviour
             Destroy(gameObject);
             playerScript.throwFlag = true;
         }
-    }
 
-    //敵に当たったら倒す
-    private void OnCollisionEnter(Collision other)
-    {
         if (other.gameObject.tag == "Enemy")
         {
+            scoreScript.AddPoint(100);
             Destroy(other.gameObject);
         }
     }
+
 }
 
