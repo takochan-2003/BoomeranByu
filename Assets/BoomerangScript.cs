@@ -17,6 +17,9 @@ public class BoomerangScript : MonoBehaviour
     GameObject gameManager;
     ScoreScript scoreScript;
 
+    //åÇîjââèo
+    [SerializeField] GameObject explosion;
+
     public Rigidbody rb;
 
     float speed;
@@ -156,6 +159,7 @@ public class BoomerangScript : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             scoreScript.AddPoint(100);
+            Instantiate(explosion, other.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
             Destroy(other.gameObject);
         }
     }

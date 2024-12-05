@@ -30,13 +30,4 @@ public class EnemyScript : MonoBehaviour
         // プレイヤーに向かって移動
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
-
-    ////ブーメランに当たったら消滅させる
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Shot")
-        {
-            Destroy(gameObject);
-        }
-    }
 }

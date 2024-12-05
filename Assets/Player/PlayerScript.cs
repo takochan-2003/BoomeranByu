@@ -7,6 +7,8 @@ public class PlayerScript : MonoBehaviour
 {
     public GameObject bullet;
     public GameObject enemy;
+    public GameObject gameManager;
+    public LifeMager lifeMagerScript;
     public CharacterController characterController;
 
    
@@ -45,10 +47,16 @@ public class PlayerScript : MonoBehaviour
         //rendertggleを取得
         renderTggle = GetComponent<RenderTggle>();
 
+        //GameManagerを取得
+        gameManager = GameObject.Find("GameManager");
+        lifeMagerScript = gameManager.GetComponent<LifeMager>();
+
         //コントローラー取得
         this.characterController = this.GetComponent<CharacterController>();
         //速度を0にする
         this.velocity = Vector3.zero;
+
+
     }
 
     // Update is called once per frame
@@ -178,6 +186,12 @@ public class PlayerScript : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             Destroy(other.gameObject);
+
+            //無敵時間の時はダメージを受けない
+            if(invincibleFlag == false)
+            {
+                lifeMagerScript.Damage();
+            }
             invincibleFlag = true;
         }
     }
