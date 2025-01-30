@@ -17,7 +17,7 @@ public class ScoreScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
 
     //スコア
-    public static int score;
+    public int score;
 
     //加算前のスコア
     private int previousValue;
