@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour
     public GameObject player;
 
     //Enemyのスピード
-    private const float speed = 1.0f;
+    private const float speed = 1.5f;
 
     // Start is called before the first frame update
     void Start()
