@@ -5,13 +5,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+//どのシーンからもアクセスできるクラス
+public static class Score
+{
+    public static int Score_ = 0;
+}
+
 public class ScoreScript : MonoBehaviour
 {
     //スコアを表示する
     [SerializeField] TextMeshProUGUI scoreText;
 
     //スコア
-    private int score;
+    public static int score;
 
     //加算前のスコア
     private int previousValue;
@@ -25,14 +31,16 @@ public class ScoreScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Score.Score_ = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Score.Score_ = score;
+
         //カウントアップのアニメーション中であれば
-        if(isCountup == true)
+        if (isCountup == true)
         {
             //スコア表示を更新する
             scoreText.SetText("{0:000000}", previousValue);
